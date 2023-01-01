@@ -1,0 +1,110 @@
+cc_library_headers {
+    name: "libnpagent_headers",
+    export_include_dirs: ["include"],
+    owner: "mtk",
+    proprietary: true,
+    host_supported: false,
+    device_supported: true,
+}
+
+cc_library_shared {
+    name: "libnpagent",
+    owner: "mtk",
+    proprietary: true,
+    host_supported: false,
+    device_supported: true,
+    header_libs: [
+        "libnpagent_headers",
+        "libnpagent_common_headers",
+        "libnpagent_profiler_headers",
+        "libgralloc_extra_headers",
+    ],
+    srcs: [
+        "Executor.cpp",
+        "NpAgent.cpp",
+        "Model.cpp",
+        "ModelAttributes.cpp",
+        "ModelManager.cpp",
+        "ServiceManager.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libgralloc_extra",
+        "libhidlbase",
+        "liblog",
+        "libnativewindow",
+        "libutils",
+        "libcutils",
+        "libsync",
+        "libui",
+        "vendor.mediatek.hardware.neuropilot.agent@1.0",
+        "vendor.mediatek.hardware.neuropilot.agent@1.1",
+        "vendor.mediatek.hardware.neuropilot.agent@1.2",
+    ],
+    static_libs: [
+        "libnpagent_common",
+        "libnpagent_profiler",
+        "libnpagent_utils_vendor",
+    ],
+    cflags: [
+        "-DNN_TARGET_ANDROID",
+    ],
+    compile_multilib: "both",
+    version_script: "libnpagent.map",
+}
+
+cc_test {
+    name: "npagent_api_test",
+    owner: "mtk",
+    srcs: [
+        "test/NpAgentApiTest.cpp",
+    ],
+    header_libs: [
+        "libnpagent_headers",
+    ],
+    shared_libs: [
+        "libbase",
+        "libgralloc_extra_sys",
+        "liblog",
+        "libnativewindow",
+        "libutils",
+        "libcutils",
+        "vendor.mediatek.hardware.neuropilot.agent@1.0",
+        "vendor.mediatek.hardware.neuropilot.agent@1.1",
+        "vendor.mediatek.hardware.neuropilot.agent@1.2",
+    ],
+    static_libs: [
+        "libgmock",
+        "libgtest",
+    ],
+}
+
+cc_test {
+    name: "npagent_api_vendor_test",
+    owner: "mtk",
+    proprietary: true,
+    srcs: [
+        "test/NpAgentApiTest.cpp",
+    ],
+    header_libs: [
+        "libnpagent_headers",
+        "libnpagent_profiler_headers",
+    ],
+    shared_libs: [
+        "libbase",
+        "libgralloc_extra",
+        "liblog",
+        "libnativewindow",
+        "libui",
+        "libutils",
+        "libcutils",
+        "vendor.mediatek.hardware.neuropilot.agent@1.0",
+        "vendor.mediatek.hardware.neuropilot.agent@1.1",
+        "vendor.mediatek.hardware.neuropilot.agent@1.2",
+    ],
+    static_libs: [
+        "libgmock",
+        "libgtest",
+        "libnpagent_profiler",
+    ],
+}

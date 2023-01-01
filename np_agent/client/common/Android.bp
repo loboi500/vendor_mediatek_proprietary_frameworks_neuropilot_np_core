@@ -1,0 +1,58 @@
+cc_library_static {
+    name: "libnpagent_utils",
+    owner: "mtk",
+    export_include_dirs: ["include"],
+    header_libs: [
+        "libnpagent_headers",
+        "libgralloc_extra_headers",
+    ],
+    shared_libs: [
+        "libbase",
+        "libgralloc_extra_sys",
+        "libhidlbase",
+        "liblog",
+        "libnativewindow",
+        "libhardware",
+        "libutils",
+        "libcutils",
+        "vendor.mediatek.hardware.neuropilot.agent@1.0",
+        "vendor.mediatek.hardware.neuropilot.agent@1.1",
+        "vendor.mediatek.hardware.neuropilot.agent@1.2",
+    ],
+    whole_static_libs: [
+        "libarect",
+    ],
+    srcs: [
+        "MemoryUtils.cpp",
+    ]
+}
+
+cc_library_static {
+    name: "libnpagent_utils_vendor",
+    owner: "mtk",
+    proprietary: true,
+    export_include_dirs: ["include"],
+    header_libs: [
+        "libnpagent_headers",
+        "libgralloc_extra_headers",
+    ],
+    shared_libs: [
+        "libbase",
+        "libgralloc_extra",
+        "libhidlbase",
+        "liblog",
+        "libnativewindow",
+        "libhardware",
+        "libutils",
+        "libcutils",
+        "vendor.mediatek.hardware.neuropilot.agent@1.0",
+        "vendor.mediatek.hardware.neuropilot.agent@1.1",
+        "vendor.mediatek.hardware.neuropilot.agent@1.2",
+    ],
+    whole_static_libs: [
+        "libarect",
+    ],
+    srcs: [
+        "MemoryUtils.cpp",
+    ]
+}

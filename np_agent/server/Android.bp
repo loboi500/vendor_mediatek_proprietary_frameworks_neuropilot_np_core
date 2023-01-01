@@ -1,0 +1,108 @@
+cc_library_headers {
+    name: "libnpagent_server_headers",
+    host_supported: false,
+    owner: "mtk",
+    proprietary: true,
+    export_include_dirs: ["include"],
+}
+
+cc_library_shared {
+    name: "libnpagent_server",
+    owner: "mtk",
+    proprietary: true,
+    // HIDL maniftst should be installed via the device-vext.mk corresponding to the platform
+    //vintf_fragments: ["res/1.0/vendor.mediatek.hardware.neuropilot.agent@1.0-service.xml"],
+    srcs: [
+        "hal/1.0/IAgentImpl_V1_0.cpp",
+        "hal/1.1/IAgentImpl_V1_1.cpp",
+        "hal/1.2/IAgentImpl_V1_2.cpp",
+        "options/RuntimeOptions.cpp",
+        "ModelFactory.cpp",
+        "NpAgentService.cpp",
+        "SharedMemory.cpp",
+        "Utils.cpp",
+    ],
+    header_libs: [
+        "libgralloc_extra_headers",
+        "libnpagent_profiler_headers",
+        "libnpagent_common_headers",
+        "NeuronRuntime_headers.5",
+    ],
+    local_include_dirs: [
+        "options",
+    ],
+    shared_libs: [
+        "libbase",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+        "libcutils",
+        "libui",
+        "libgralloc_extra",
+        "libhidlmemory",
+        "libneuron_runtime.5",
+		"vendor.mediatek.hardware.neuropilot.agent@1.0",
+        "vendor.mediatek.hardware.neuropilot.agent@1.1",
+        "vendor.mediatek.hardware.neuropilot.agent@1.2",
+    ],
+    static_libs: [
+        "libnpagent_common",
+        "libnpagent_profiler",
+    ],
+    cflags: [
+        "-DNN_TARGET_ANDROID",
+    ],
+    compile_multilib: "64",
+}
+
+cc_test {
+    name: "npagent_test",
+    owner: "mtk",
+    proprietary: true,
+    srcs: [
+        "test/NpAgentTest.cpp",
+        "test/Main.cpp",
+    ],
+    header_libs: [
+        "libnpagent_server_headers",
+    ],
+    shared_libs: [
+        "libbase",
+        "libgralloc_extra",
+        "libhidlbase",
+        "liblog",
+        "libnativewindow",
+        "libui",
+        "libutils",
+        "libcutils",
+        "vendor.mediatek.hardware.neuropilot.agent@1.0",
+        "vendor.mediatek.hardware.neuropilot.agent@1.1",
+        "vendor.mediatek.hardware.neuropilot.agent@1.2",
+    ],
+    static_libs: [
+        "libgmock",
+        "libgtest",
+    ],
+}
+
+cc_test {
+    name: "npagent_test_service",
+    owner: "mtk",
+    proprietary: true,
+    srcs: [
+        "test/NpAgentTestService.cpp",
+    ],
+    header_libs: [
+        "libnpagent_server_headers",
+    ],
+    shared_libs: [
+        "libbase",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+        "libcutils",
+        "vendor.mediatek.hardware.neuropilot.agent@1.0",
+        "vendor.mediatek.hardware.neuropilot.agent@1.1",
+        "vendor.mediatek.hardware.neuropilot.agent@1.2",
+    ],
+}

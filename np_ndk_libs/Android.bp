@@ -1,0 +1,59 @@
+cc_prebuilt_library_shared {
+    name: "libarmnn_ndk.mtk.vndk",
+    proprietary: true,
+    owner: "mtk",
+    arch: {
+        arm: {
+            srcs: ["lib/libarmnn_ndk.mtk.vndk.so"],
+        },
+        arm64: {
+            srcs: ["lib64/libarmnn_ndk.mtk.vndk.so"],
+        },
+    },
+    strip: {
+        none:true,
+    },
+    shared_libs: ["libc", "libcmdl_ndk.mtk.vndk", "libdl", "liblog", "libm"],
+    compile_multilib: "both",
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libcmdl_ndk.mtk.vndk",
+    proprietary: true,
+    owner: "mtk",
+    arch: {
+        arm: {
+            srcs: ["lib/libcmdl_ndk.mtk.vndk.so"],
+        },
+        arm64: {
+            srcs: ["lib64/libcmdl_ndk.mtk.vndk.so"],
+        },
+    },
+    strip: {
+        none:true,
+    },
+    shared_libs: ["libc", "libdl", "liblog", "libm"],
+    compile_multilib: "both",
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libnir_neon_driver_ndk.mtk.vndk",
+    proprietary: true,
+    owner: "mtk",
+    arch: {
+        arm: {
+            srcs: ["lib/libnir_neon_driver_ndk.mtk.so"],
+        },
+        arm64: {
+            srcs: ["lib64/libnir_neon_driver_ndk.mtk.so"],
+        },
+    },
+    strip: {
+        none:true,
+    },
+    shared_libs: ["libc", "libdl", "liblog", "libm"],
+    compile_multilib: "both",
+    check_elf_files: false,
+}

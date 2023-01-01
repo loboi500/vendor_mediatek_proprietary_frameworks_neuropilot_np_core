@@ -1,0 +1,30 @@
+cc_library_headers {
+    name: "libnpagent_common_headers",
+    export_include_dirs: ["include"],
+    owner: "mtk",
+    proprietary: true,
+    host_supported: false,
+    device_supported: true,
+}
+
+cc_library_static {
+    name: "libnpagent_common",
+    srcs: [
+        "CpuUtils.cpp",
+        "SyncFence.cpp",
+    ],
+    header_libs: [
+        "libnpagent_common_headers"
+        ],
+    owner: "mtk",
+    proprietary: true,
+    host_supported: false,
+    device_supported: true,
+    shared_libs: [
+        "libbase",
+    ],
+    cflags: [
+        "-UNDEBUG",
+        "-DNN_TARGET_ANDROID",
+    ],
+}

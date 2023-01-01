@@ -1,0 +1,30 @@
+cc_library_headers {
+    name: "libnpagent_profiler_headers",
+    export_include_dirs: ["include"],
+    owner: "mtk",
+    proprietary: true,
+    host_supported: false,
+    device_supported: true,
+}
+
+cc_library_static {
+    name: "libnpagent_profiler",
+    srcs: [
+        "ScopeProfiler.cpp",
+        "Stopwatch.cpp",
+        "Trace.cpp",
+    ],
+    header_libs: [
+        "libnpagent_profiler_headers"
+        ],
+    proprietary: true,
+    host_supported: false,
+    device_supported: true,
+    shared_libs: [
+        "libbase",
+    ],
+    cflags: [
+        "-UNDEBUG",
+        "-DNN_TARGET_ANDROID",
+    ],
+}
